@@ -70,6 +70,7 @@ jobs:
   build_dotnet:
     docker:
       - image: mcneel/rhino3dm-dev:latest
+    steps:
       - checkout
       - run: git submodule update --init
       - run: python3 --version
