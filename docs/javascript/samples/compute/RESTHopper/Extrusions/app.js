@@ -1,41 +1,44 @@
-let args = {
-    algo : null, 
+let args1 = {
+    algo : null,
     pointer : null,
     values : []
 };
 
-let definition = null;
+let definition1 = null;
 
 // get slider values
-let count = document.getElementById('count').value;
-let radius = document.getElementById('radius').value;
-let length = document.getElementById('length').value;
+let count1 = document.getElementById('count').value;
+let radius1 = document.getElementById('radius').value;
+let length1 = document.getElementById('length').value;
 
-let param1 = new RhinoCompute.Grasshopper.DataTree('RH_IN:201:Length');
-param1.append([0], [length]);
+let param11 = new RhinoCompute.Grasshopper.DataTree('RH_IN:201:Length');
+param11.append([0], [length]);
 
-let param2 = new RhinoCompute.Grasshopper.DataTree('RH_IN:201:Radius');
-param2.append([0], [radius]);
+let param21 = new RhinoCompute.Grasshopper.DataTree('RH_IN:201:Radius');
+param21.append([0], [radius]);
 
-let param3 = new RhinoCompute.Grasshopper.DataTree('RH_IN:201:Count');
-param3.append([0], [count]);
+let param31 = new RhinoCompute.Grasshopper.DataTree('RH_IN:201:Count');
+param31.append([0], [count]);
 
 rhino3dm().then(async m => {
     console.log('Loaded rhino3dm.');
     rhino = m; // global
 
+
     // authenticate
-    RhinoCompute.authToken = RhinoCompute.getAuthToken();
+    //RhinoCompute.authToken = RhinoCompute.getAuthToken();
+    RhinoCompute.authToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwIjoiUEtDUyM3IiwiYyI6IkFFU18yNTZfQ0JDIiwiYjY0aXYiOiJzdnRZNGVtMTREZE5CZUF2NGoxWEJnPT0iLCJiNjRjdCI6IitoUkt6cTI2dk1wMWpCM2cydFE0SkJaRHFKaFp6UUN0NElqajl6a3JEYjBFRks5bWdzN0xCQk9rVUZuVENaVncxeis3czBBUXFCWi9IdllzYkcvUXpQNit5elk1VjgwL3hUMGFwZm1WaW5PNG1HWndXY1g3RDNwZTRYd1orblZGVzdIT0VYZ3N6UHhpNm12cGQ0VnZpdnRDcmZjZUU4VmhpbkJjcExhdmIxdkRFNHl5VzgvUDVzOVViUzJKbEhxeHRhL1lXSnJNVmxZWjh2WGQ1Mi9DTXc9PSIsImlhdCI6MTU4NTc3MDYxN30.vr3jR9B6rjSrZwkNnB6s48zZGPfpaEsz3fVj8ufjAfc"
+
 
     // if you have a different Rhino.Compute server, add the URL here:
     //RhinoCompute.url = "";
 
     // load a .gh (binary) file!
-     let url = 'BranchNodeRnd.gh';
-     let res = await fetch(url);
-     let buffer = await res.arrayBuffer();
-     let arr = new Uint8Array(buffer);
-     definition = arr;
+     let url1 = 'BranchNodeRnd.gh';
+     let res1 = await fetch(url1);
+     let buffer1 = await res1.arrayBuffer();
+     let arr1 = new Uint8Array(buffer1);
+     definition1 = arr1;
 
     // try this instead to load a .ghx (xml) file!
     //let url = 'BranchNodeRnd.ghx';
@@ -43,11 +46,10 @@ rhino3dm().then(async m => {
     //let text = await res.text();
     //definition = text;
 
-    init();
-    compute();
+    compute1();
 });
 
-function compute(){
+function compute1(){
 
     // clear values
     let trees = [];
@@ -56,7 +58,7 @@ function compute(){
     trees.push(param2);
     trees.push(param3);
 
-    RhinoCompute.Grasshopper.evaluateDefinition(definition, trees).then(result => {
+    RhinoCompute.Grasshopper.evaluateDefinition(definition1, trees).then(result => {
         // RhinoCompute.computeFetch("grasshopper", args).then(result => {
         console.log(result);
 
@@ -67,7 +69,7 @@ function compute(){
         let mesh = rhino.CommonObject.decode(data);
 
         let material = new THREE.MeshNormalMaterial();
-        let threeMesh = meshToThreejs(mesh, material);
+        let threeMesh = meshToThreejs1(mesh, material);
 
         // clear meshes from scene
         scene.traverse(child => {
@@ -80,7 +82,7 @@ function compute(){
     });
 }
 
-function onSliderChange(){
+function onSliderChange1(){
 
     // show spinner
     document.getElementById('loader').style.display = 'block';
@@ -104,43 +106,9 @@ function onSliderChange(){
 
 // BOILERPLATE //
 
-var scene, camera, renderer, controls;
 
-function init(){
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(1,1,1);
-    camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 1000 );
-
-    renderer = new THREE.WebGLRenderer({antialias: true});
-    renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    var canvas = document.getElementById('canvas');
-    canvas.appendChild( renderer.domElement );
-
-    controls = new THREE.OrbitControls( camera, renderer.domElement  );
-
-    camera.position.z = 50;
-
-    window.addEventListener( 'resize', onWindowResize, false );
-
-    animate();
-}
-
-var animate = function () {
-    requestAnimationFrame( animate );
-    controls.update();
-    renderer.render( scene, camera );
-};
-  
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    animate();
-}
-
-function meshToThreejs(mesh, material) {
+function meshToThreejs1(mesh1, material) {
     let loader = new THREE.BufferGeometryLoader();
-    var geometry = loader.parse(mesh.toThreejsJSON());
-    return new THREE.Mesh(geometry, material);
+    var geometry1 = loader.parse(mesh1.toThreejsJSON());
+    return new THREE.Mesh(geometry1, material);
 }
