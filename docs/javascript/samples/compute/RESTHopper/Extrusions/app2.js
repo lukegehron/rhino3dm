@@ -26,9 +26,8 @@ rhino3dm().then(async m => {
 
 
     // authenticate
-    //RhinoCompute.authToken = RhinoCompute.getAuthToken();
-    RhinoCompute.authToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwIjoiUEtDUyM3IiwiYyI6IkFFU18yNTZfQ0JDIiwiYjY0aXYiOiJzdnRZNGVtMTREZE5CZUF2NGoxWEJnPT0iLCJiNjRjdCI6IitoUkt6cTI2dk1wMWpCM2cydFE0SkJaRHFKaFp6UUN0NElqajl6a3JEYjBFRks5bWdzN0xCQk9rVUZuVENaVncxeis3czBBUXFCWi9IdllzYkcvUXpQNit5elk1VjgwL3hUMGFwZm1WaW5PNG1HWndXY1g3RDNwZTRYd1orblZGVzdIT0VYZ3N6UHhpNm12cGQ0VnZpdnRDcmZjZUU4VmhpbkJjcExhdmIxdkRFNHl5VzgvUDVzOVViUzJKbEhxeHRhL1lXSnJNVmxZWjh2WGQ1Mi9DTXc9PSIsImlhdCI6MTU4NTc3MDYxN30.vr3jR9B6rjSrZwkNnB6s48zZGPfpaEsz3fVj8ufjAfc"
-
+    RhinoCompute.authToken = RhinoCompute.getAuthToken();
+   
 
     // if you have a different Rhino.Compute server, add the URL here:
     //RhinoCompute.url = "";
