@@ -27,15 +27,15 @@ rhino3dm().then(async m => {
 
     // authenticate
     //RhinoCompute.authToken = RhinoCompute.getAuthToken();
-    RhinoCompute.authToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwIjoiUEtDUyM3IiwiYyI6IkFFU18yNTZfQ0JDIiwiYjY0aXYiOiJzdnRZNGVtMTREZE5CZUF2NGoxWEJnPT0iLCJiNjRjdCI6IitoUkt6cTI2dk1wMWpCM2cydFE0SkJaRHFKaFp6UUN0NElqajl6a3JEYjBFRks5bWdzN0xCQk9rVUZuVENaVncxeis3czBBUXFCWi9IdllzYkcvUXpQNit5elk1VjgwL3hUMGFwZm1WaW5PNG1HWndXY1g3RDNwZTRYd1orblZGVzdIT0VYZ3N6UHhpNm12cGQ0VnZpdnRDcmZjZUU4VmhpbkJjcExhdmIxdkRFNHl5VzgvUDVzOVViUzJKbEhxeHRhL1lXSnJNVmxZWjh2WGQ1Mi9DTXc9PSIsImlhdCI6MTU4NTc3MDYxN30.vr3jR9B6rjSrZwkNnB6s48zZGPfpaEsz3fVj8ufjAfc"
+    RhinoCompute.authToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwIjoiUEtDUyM3IiwiYyI6IkFFU18yNTZfQ0JDIiwiYjY0aXYiOiJPM1hQbG8wVjlsNHBTcXdKOWM4V1pnPT0iLCJiNjRjdCI6ImFxSm9FU21IYTYxK3pyZUpYRGZmSlFESGtNNHBMN3BWUkI1dmJFdHlUVTFpaWxickRldDBXc1dKL09EQ2gyWU0xWXlOR2ZBUnlyTUxXejY4cVJBYm96Z0Vxb2puNnZVb3dKMXlIRDBwSFBPU25mZ1N2V0VhMlBmdWxUK0pZRzM5dllFeDh3eVcxR2YwOEphaTFxUVZtNkFOQ010WXE3YTVSRm9NbWhhQ3BTbTh1eW9hTkx0SjN2aWRtZEdlcmVDREk3L04xdHhZT3ZqeWNlUFltbVUzYmc9PSIsImlhdCI6MTU4NTkyMTUxOX0.XwfN99fcj6nYD0O0YNS4tg_qxoEX-rUEkVO2Tlvuxso"
 
 
     // if you have a different Rhino.Compute server, add the URL here:
     //RhinoCompute.url = "";
 
     // load a .gh (binary) file!
-     let url = 'LabBench12.gh';
-     let res = await fetch(url);
+     let url = 'LabBench13.gh';
+     let res = await fetch(url, {mode: 'no-cors'});
      let buffer = await res.arrayBuffer();
      let arr = new Uint8Array(buffer);
      definition = arr;
@@ -71,18 +71,18 @@ function compute(){
         let data = JSON.parse(result.values[0].InnerTree['{ 0; }'][1].data);
         let mesh = rhino.CommonObject.decode(data);
 
-        var texture1 = new THREE.TextureLoader().load( "https://threejsfundamentals.org/threejs/resources/images/wall.jpg" );
-        texture1.wrapS = THREE.RepeatWrapping;
+        //var texture1 = new THREE.TextureLoader().load( "https://threejsfundamentals.org/threejs/resources/images/wall.jpg" );
+        //texture1.wrapS = THREE.RepeatWrapping;
         // texture1.wrapT = THREE.RepeatWrapping;
         // texture1.repeat.set( 0.001, 0.001 );
 
         const loader = new THREE.TextureLoader();
 
-        let material = new THREE.MeshBasicMaterial({
-            side: THREE.DoubleSide,
-            // color: 0xff0000,
+        let material = new THREE.MeshPhongMaterial({
+            //side: THREE.DoubleSide,
+             color: 0xcccccc,
             transparent: false,
-            map: texture1
+            //map: texture1
         });
 
         let threeMesh = meshToThreejs(mesh, material);
@@ -100,6 +100,22 @@ function compute(){
 
         data = JSON.parse(result.values[0].InnerTree['{ 0; }'][0].data);
         mesh = rhino.CommonObject.decode(data);
+
+        threeMesh = meshToThreejs(mesh, material);
+
+
+        scene.add(threeMesh);
+
+
+        data = JSON.parse(result.values[0].InnerTree['{ 0; }'][2].data);
+        mesh = rhino.CommonObject.decode(data);
+
+        material = new THREE.MeshPhongMaterial({
+            //side: THREE.DoubleSide,
+             color: 0x333333,
+            transparent: false,
+            //map: texture1
+        });
 
         threeMesh = meshToThreejs(mesh, material);
 
