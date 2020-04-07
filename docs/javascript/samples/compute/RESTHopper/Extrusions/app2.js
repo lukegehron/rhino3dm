@@ -50,6 +50,8 @@ rhino3dm().then(async m => {
     compute();
 });
 
+document.getElementById('loader').style.display = 'none';
+
 function compute(){
 
     // clear values
@@ -128,7 +130,7 @@ function compute(){
 function onSliderChange(){
 
     // show spinner
-    document.getElementById('loader').style.display = 'block';
+    // document.getElementById('loader').style.display = 'block';
 
     // get slider values
     height = document.getElementById('height').value;
@@ -172,18 +174,21 @@ function onSliderChange(){
 
 // BOILERPLATE //
 
+
+
+
 var scene, camera, renderer, controls;
 
 function init(){
     scene = new THREE.Scene();
     scene.background = new THREE.Color(1,1,1);
-    camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 1000 );
+    camera = new THREE.PerspectiveCamera( 45, 2, 1, 1000 );
 
     var ambient_light = new THREE.AmbientLight(0x333333);
     scene.add(ambient_light);
 
     var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    directionalLight.position.set(0, -1, 0);
+    directionalLight.position.set(0, -1, -1);
     scene.add(directionalLight);
 
     var point_light = new THREE.PointLight(0xffffff);
@@ -192,17 +197,22 @@ function init(){
     point_light.position.z = 100;
     scene.add(point_light);
 
-    renderer = new THREE.WebGLRenderer({antialias: true});
-    renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer = new THREE.WebGLRenderer({canvas: document.querySelector("canvas"), antialias: true});
+
+
+
+
     var canvas = document.getElementById('canvas');
-    canvas.appendChild( renderer.domElement );
+    renderer.setSize((canvas.clientWidth), (canvas.clientHeight));
+
+    // canvas.appendChild( renderer.domElement );
 
     controls = new THREE.OrbitControls( camera, renderer.domElement  );
 
-    camera.position.z = 50;
+    camera.position.z = 70;
 
-    window.addEventListener( 'resize', onWindowResize, false );
+    // window.addEventListener( 'resize', onWindowResize, false );
+    window.addEventListener( 'resize', resizeCanvasToDisplaySize, false );
 
     animate();
 }
@@ -214,11 +224,26 @@ var animate = function () {
 };
 
 function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = window.innerWidth / window.innerHeight*2;
     camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize( window.innerWidth, window.innerHeight/2 );
     animate();
 }
+
+function resizeCanvasToDisplaySize() {
+  const canvas = renderer.domElement;
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  if (canvas.width !== width ||canvas.height !== height) {
+    // you must pass false here or three.js sadly fights the browser
+    renderer.setSize(width, height, false);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+
+    // set render target sizes here
+  }
+}
+
 
 function meshToThreejs(mesh, material) {
     let loader = new THREE.BufferGeometryLoader();
