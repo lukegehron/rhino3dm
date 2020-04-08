@@ -341,7 +341,7 @@ span#case1Button.unselected, span#case2Button.unselected, span#case3Button.unsel
 	text-transform: uppercase;
 	padding: 0 0 15px 0;
 	margin: 0 0 10px 0;
-	width: 190px;
+	width: 100px;
 }
 
 #inputs legend.first {
@@ -435,10 +435,10 @@ div.inputWrapperRight span {
 
 
 #inputs input {
-	padding: 2px 3px 1px 1px;
-	margin: 0px 12px 0px 0px;
+	/* padding: 2px 3px 1px 1px;
+	margin: 0px 1px 12px 1px; */
 	display: inline-block;
-	float: left;
+	/* float: right; */
 	width: 4em;
 	height: 13px;
 
@@ -495,10 +495,10 @@ br.glzBR {
 	width: 165px;
 }
 
-
+/*
 #inputs #designConditWrapper label {
 	width: 160px;
-}
+} */
 
 
 #inputs label, #occupantSliders label {
@@ -517,7 +517,7 @@ br.glzBR {
 
 #inputs label {
 	color: #777;
-	width: 226px;
+	width: 300px;
 }
 
 #inputs label.grey {
@@ -560,13 +560,7 @@ br.glzBR {
 	width: 15px;
 }
 
-/* input[type=checkbox] {
-	visibility: hidden;
-} */
 
-/* input[type=radio] {
-	visibility: hidden;
-} */
 
 #inputs div.customCheckStyle {
 	width: 12px;
@@ -601,47 +595,7 @@ br.glzBR {
 }
 
 
-/* #inputs div.customCheckStyle label.unselected, #inputs div.customCheckStyleCentered label.unselected {
-	border: 1px solid rgb(235, 235, 235);
-	width: 10px;
-	height: 10px;
-	background: #fff;
-} */
 
-
-
-
-
-/* tick for inside checkbox */
-/* #inputs div.customCheckStyle label:after, #inputs div.customCheckStyleCentered label:after {
-	opacity: 1;
-	content: '';
-	position: absolute;
-	width: 6px;
-	height: 4px;
-	background: transparent;
-	top: 3px;
-	left: 3px;
-	border: 2px solid #777;
-	border-top: none;
-	border-right: none;
-
-	-webkit-transform: rotate(-45deg);
-	-moz-transform: rotate(-45deg);
-	-o-transform: rotate(-45deg);
-	-ms-transform: rotate(-45deg);
-	transform: rotate(-45deg);
-}
-
-#inputs div.customCheckStyle label.unselected:after, #inputs div.customCheckStyleCentered label.unselected:after {
-	opacity: 0;
-}
-
-#inputs div.customCheckStyle label.unselected:hover::after, #inputs div.customCheckStyleCentered label.unselected:hover::after {
-	opacity: 0.5;
-	top: 2px;
-	left: 2px;
-} */
 
 
 

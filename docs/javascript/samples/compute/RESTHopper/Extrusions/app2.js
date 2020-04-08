@@ -210,6 +210,8 @@ function init(){
     controls = new THREE.OrbitControls( camera, renderer.domElement  );
 
     camera.position.z = 70;
+    camera.position.set(40,30,30); // Set position like this
+    camera.lookAt(new THREE.Vector3(0,-5,0)); // Set look at coordinate like this
 
     // window.addEventListener( 'resize', onWindowResize, false );
     window.addEventListener( 'resize', resizeCanvasToDisplaySize, false );
