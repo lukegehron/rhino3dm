@@ -491,7 +491,16 @@ br.glzBR {
 }
 
 #citySearch {
+	position: absolute;
 	float: left;
+	margin-left: 185px;
+	width: 165px;
+}
+
+#citySearchy {
+	position: absolute;
+	float: right;
+	margin-left: 285px;
 	width: 165px;
 }
 
